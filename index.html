@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Hub - Speel Geweldige Games!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            color: #667eea;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+
+        /* Sections */
+        section {
+            padding: 50px 20px;
+            background: white;
+        }
+
+        section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 2px solid #667eea;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .game-info {
+            padding: 1.5rem;
+        }
+
+        .game-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-category {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-description {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .btn-play {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .btn-play:hover {
+            background: #ff5252;
+        }
+
+        /* Categories */
+        .categories {
+            background: #f8f9fa;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 2px solid #667eea;
+        }
+
+        .category-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                gap: 1rem;
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🎮 Gaming Hub</h1>
+            <nav class="nav">
+                <a href="#home" onclick="location.reload()">Home</a>
+                <a href="#populair">Populair</a>
+                <a href="#categories">Categorieën</a>
+                <a href="#nieuw">Nieuw</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="container">
+            <h2>Welkom bij Gaming Hub!</h2>
+            <p>🎮 Speel GRATIS geweldige games direct in je browser 🎮</p>
+            <button class="btn-primary" onclick="document.getElementById('populair').scrollIntoView()">Begin Nu!</button>
+        </div>
+    </section>
+
+    <section id="populair" class="populair">
+        <div class="container">
+            <h2>⭐ Populaire Games</h2>
+            <div class="games-grid" id="populair-games"></div>
+        </div>
+    </section>
+
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2>📂 Categorieën</h2>
+            <div class="categories-grid" id="categories-list"></div>
+        </div>
+    </section>
+
+    <section id="nieuw" class="nieuw">
+        <div class="container">
+            <h2>🆕 Nieuwe Games</h2>
+            <div class="games-grid" id="nieuw-games"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Gaming Hub. Alle rechten voorbehouden. Made with ❤️ by ckroks</p>
+    </footer>
+
+    <!-- Game Modal -->
+    <div id="game-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeGame()">&times;</span>
+            <div id="game-container"></div>
+        </div>
+    </div>
+
+    <script>
+        // ============ GAMES DATABASE ============
+        const games = [
+            {
+                id: 1,
+                title: "Snake Game",
+                category: "Action",
+                description: "Het klassieke Snake spel! Eet de rode blokken en groei!",
+                emoji: "🐍",
+                isNew: false,
+                isPopular: true,
+                game: "snake"
+            },
+            {
+                id: 2,
+                title: "Memory Game",
+                category: "Puzzle",
+                description: "Vind alle overeenkomende paren! Test je geheugen!",
+                emoji: "🧠",
+                isNew: false,
+                isPopular: true,
+                game: "memory"
+            },
+            {
+                id: 3,
+                title: "Flappy Bird",
+                category: "Action",
+                description: "Vliegen door de buizen! Hoe hoog kan je gaan?",
+                emoji: "🐦",
+                isNew: false,
+                isPopular: true,
+                game: "flappy"
+            },
+            {
+                id: 4,
+                title: "Tic Tac Toe",
+                category: "Strategy",
+                description: "Het klassieke X en O spel tegen de computer!",
+                emoji: "⭕",
+                isNew: false,
+                isPopular: true,
+                game: "tictactoe"
+            },
+            {
+                id: 5,
+                title: "Pong",
+                category: "Action",
+                description: "De klassieke Pong! Sla de bal terug!",
+                emoji: "🎾",
+                isNew: true,
+                isPopular: false,
+                game: "pong"
+            },
+            {
+                id: 6,
+                title: "Hangman",
+                category: "Puzzle",
+                description: "Raad het woord voordat de galgstraf compleet is!",
+                emoji: "🎯",
+                isNew: true,
+                isPopular: true,
+                game: "hangman"
+            },
+            {
+                id: 7,
+                title: "Dice Roller",
+                category: "Casual",
+                description: "Gooi dobbelstenen en win grote prijzen!",
+                emoji: "🎲",
+                isNew: true,
+                isPopular: false,
+                game: "dice"
+            },
+            {
+                id: 8,
+                title: "2048",
+                category: "Puzzle",
+                description: "Combineer getallen naar 2048! Een klassieke puzzel!",
+                emoji: "🔢",
+                isNew: true,
+                isPopular: true,
+                game: "2048"
+            },
+            {
+                id: 9,
+                title: "Breakout",
+                category: "Action",
+                description: "Verniel alle blokken met je bal!",
+                emoji: "💥",
+                isNew: true,
+                isPopular: false,
+                game: "breakout"
+            }
+        ];
+
+        const categories = [
+            { name: "Action", icon: "⚡", count: 3 },
+            { name: "Puzzle", icon: "🧩", count: 4 },
+            { name: "Strategy", icon: "♟️", count: 1 },
+            { name: "Casual", icon: "🎉", count: 1 }
+        ];
+
+        // ============ INITIALIZE ============
+        function initGames() {
+            const populairGames = games.filter(g => g.isPopular);
+            displayGames(populairGames, 'populair-games');
+
+            const nieuweGames = games.filter(g => g.isNew);
+            displayGames(nieuweGames, 'nieuw-games');
+
+            displayCategories();
+        }
+
+        function displayGames(gamesList, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = gamesList.map(game => `
+                <div class="game-card" onclick="playGame('${game.game}')">
+                    <div class="game-image">${game.emoji}</div>
+                    <div class="game-info">
+                        <div class="game-title">${game.title}</div>
+                        <div class="game-category">${game.category}</div>
+                        <p class="game-description">${game.description}</p>
+                        <button class="btn-play">▶️ Spelen</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function displayCategories() {
+            const container = document.getElementById('categories-list');
+            container.innerHTML = categories.map(cat => `
+                <div class="category-card" onclick="filterByCategory('${cat.name}')">
+                    <div class="category-icon">${cat.icon}</div>
+                    <div class="category-name">${cat.name}</div>
+                    <small>${cat.count} games</small>
+                </div>
+            `).join('');
+        }
+
+        function filterByCategory(categoryName) {
+            const filtered = games.filter(g => g.category === categoryName);
+            displayGames(filtered, 'populair-games');
+            document.getElementById('populair').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function playGame(gameName) {
+            const modal = document.getElementById('game-modal');
+            const container = document.getElementById('game-container');
+            container.innerHTML = '';
+
+            switch(gameName) {
+                case 'snake': loadSnakeGame(container); break;
+                case 'memory': loadMemoryGame(container); break;
+                case 'flappy': loadFlappyGame(container); break;
+                case 'tictactoe': loadTicTacToe(container); break;
+                case 'pong': loadPongGame(container); break;
+                case 'hangman': loadHangmanGame(container); break;
+                case 'dice': loadDiceGame(container); break;
+                case '2048': load2048Game(container); break;
+                case 'breakout': loadBreakoutGame(container); break;
+            }
+
+            modal.style.display = 'block';
+        }
+
+        function closeGame() {
+            document.getElementById('game-modal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('game-modal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // ============ SNAKE GAME ============
+        function loadSnakeGame(container) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 400;
+            canvas.height = 400;
+            canvas.style.background = '#222';
+            canvas.style.border = '2px solid #00ff00';
+            canvas.style.display = 'block';
+            canvas.style.margin = '20px auto';
+            container.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            let snake = [{x: 10, y: 10}];
+            let food = {x: 15, y: 15};
+            let direction = {x: 1, y: 0};
+            let nextDirection = {x: 1, y: 0};
+            let score = 0;
+            let gameRunning = true;
+
+            const handleKeyDown = (e) => {
+                if (e.key === 'ArrowUp' && direction.y === 0) nextDirection = {x: 0, y: -1};
+                if (e.key === 'ArrowDown' && direction.y === 0) nextDirection = {x: 0, y: 1};
+                if (e.key === 'ArrowLeft' && direction.x === 0) nextDirection = {x: -1, y: 0};
+                if (e.key === 'ArrowRight' && direction.x === 0) nextDirection = {x: 1, y: 0};
+            };
+
+            document.addEventListener('keydown', handleKeyDown);
+
+            function update() {
+                direction = nextDirection;
+                const head = {x: snake[0].x + direction.x, y: snake[0].y + direction.y};
+
+                if (head.x === food.x && head.y === food.y) {
+                    score += 10;
+                    food = {x: Math.floor(Math.random() * 20), y: Math.floor(Math.random() * 20)};
+                } else {
+                    snake.pop();
+                }
+
+                if (head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20 || snake.some(s => s.x === head.x && s.y === head.y)) {
+                    gameRunning = false;
+                    alert(`Game Over! 🎮 Score: ${score}`);
+                    document.removeEventListener('keydown', handleKeyDown);
+                    return false;
+                }
+
+                snake.unshift(head);
+                return true;
+            }
+
+            function draw() {
+                ctx.fillStyle = '#222';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#00ff00';
+                snake.forEach((segment, i) => {
+                    ctx.fillRect(segment.x * 20, segment.y * 20, 18, 18);
+                });
+
+                ctx.fillStyle = '#ff0000';
+                ctx.fillRect(food.x * 20, food.y * 20, 18, 18);
+
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 16px Arial';
+                ctx.fillText(`Score: ${score}`, 10, 25);
+                ctx.font = '12px Arial';
+                ctx.fillText('Pijltjestoetsen om te bewegen', 10, 390);
+            }
+
+            function gameLoop() {
+                if (update()) {
+                    draw();
+                    setTimeout(gameLoop, 100);
+                }
+            }
+
+            gameLoop();
+        }
+
+        // ============ MEMORY GAME ============
+        function loadMemoryGame(container) {
+            const emojis = ['🍎', '🍌', '🍇', '🍓', '🍑', '🥝', '🍊', '🍋', '🍎', '🍌', '🍇', '🍓', '🍑', '🥝', '🍊', '🍋'];
+            let shuffled = emojis.sort(() => Math.random() - 0.5);
+            let flipped = [];
+            let matched = [];
+            let moves = 0;
+
+            const gameBoard = document.createElement('div');
+            gameBoard.style.display = 'grid';
+            gameBoard.style.gridTemplateColumns = 'repeat(4, 100px)';
+            gameBoard.style.gap = '10px';
+            gameBoard.style.margin = '20px auto';
+            gameBoard.style.width = 'fit-content';
+
+            const cards = shuffled.map((emoji, index) => {
+                const card = document.createElement('button');
+                card.textContent = '?';
+                card.style.width = '100px';
+                card.style.height = '100px';
+                card.style.fontSize = '40px';
+                card.style.cursor = 'pointer';
+                card.style.background = '#667eea';
+                card.style.color = 'white';
+                card.style.border = 'none';
+                card.style.borderRadius = '5px';
+                card.style.fontWeight = 'bold';
+                card.onclick = () => {
+                    if (flipped.includes(index) || matched.includes(index)) return;
+                    flipped.push(index);
+                    card.textContent = emoji;
+                    card.style.background = '#764ba2';
+
+                    if (flipped.length === 2) {
+                        moves++;
+                        const [i1, i2] = flipped;
+                        if (shuffled[i1] === shuffled[i2]) {
+                            matched.push(i1, i2);
+                            flipped = [];
+                            if (matched.length === shuffled.length) {
+                                setTimeout(() => alert(`🎉 Gewonnen! ${moves} bewegingen!`), 300);
+                            }
+                        } else {
+                            setTimeout(() => {
+                                cards[i1].textContent = '?';
+                                cards[i1].style.background = '#667eea';
+                                cards[i2].textContent = '?';
+                                cards[i2].style.background = '#667eea';
+                                flipped = [];
+                            }, 500);
+                        }
+                    }
+                };
+                return card;
+            });
+
+            cards.forEach(card => gameBoard.appendChild(card));
+            container.appendChild(gameBoard);
+        }
+
+        // ============ FLAPPY BIRD ============
+        function loadFlappyGame(container) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 300;
+            canvas.height = 400;
+            canvas.style.background = '#87CEEB';
+            canvas.style.display = 'block';
+            canvas.style.margin = '20px auto';
+            container.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            let bird = {x: 50, y: 150, width: 30, height: 30, velocity: 0};
+            let gravity = 0.5;
+            let pipes = [];
+            let score = 0;
+            let gameRunning = true;
+
+            document.addEventListener('keydown', (e) => {
+                if (e.code === 'Space' || e.key === 'ArrowUp') {
+                    bird.velocity = -8;
+                }
+            });
+
+            function update() {
+                bird.velocity += gravity;
+                bird.y += bird.velocity;
+
+                if (bird.y + bird.height > canvas.height || bird.y < 0) {
+                    gameRunning = false;
+                    alert(`Game Over! Score: ${score}`);
+                    return;
+                }
+
+                if (pipes.length === 0 || pipes[pipes.length - 1].x < 150) {
+                    pipes.push({x: canvas.width, gap: 80 + Math.random() * 60, gapY: 50 + Math.random() * 200});
+                }
+
+                pipes.forEach(pipe => {
+                    pipe.x -= 3;
+
+                    if (bird.x + bird.width > pipe.x && bird.x < pipe.x + 60) {
+                        if (bird.y < pipe.gapY || bird.y + bird.height > pipe.gapY + pipe.gap) {
+                            gameRunning = false;
+                            alert(`Game Over! Score: ${score}`);
+                        }
+                    }
+
+                    if (pipe.x + 60 < bird.x && !pipe.scored) {
+                        pipe.scored = true;
+                        score++;
+                    }
+                });
+
+                pipes = pipes.filter(p => p.x > -60);
+
+                if (gameRunning) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            function draw() {
+                ctx.fillStyle = '#87CEEB';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#FFD700';
+                ctx.fillRect(bird.x, bird.y, bird.width, bird.height);
+
+                ctx.fillStyle = '#228B22';
+                pipes.forEach(pipe => {
+                    ctx.fillRect(pipe.x, 0, 60, pipe.gapY);
+                    ctx.fillRect(pipe.x, pipe.gapY + pipe.gap, 60, canvas.height - pipe.gapY - pipe.gap);
+                });
+
+                ctx.fillStyle = '#000';
+                ctx.font = 'bold 20px Arial';
+                ctx.fillText(`Score: ${score}`, 10, 30);
+                ctx.font = '12px Arial';
+                ctx.fillText('Spatie om te vliegen', 10, 390);
+            }
+
+            function gameLoop() {
+                draw();
+                update();
+            }
+
+            gameLoop();
+        }
+
+        // ============ TIC TAC TOE ============
+        function loadTicTacToe(container) {
+            let board = ['', '', '', '', '', '', '', '', ''];
+            let human = 'O';
+            let ai = 'X';
+            let gameRunning = true;
+
+            const gameBoard = document.createElement('div');
+            gameBoard.style.display = 'grid';
+            gameBoard.style.gridTemplateColumns = 'repeat(3, 100px)';
+            gameBoard.style.gap = '5px';
+            gameBoard.style.margin = '20px auto';
+            gameBoard.style.width = 'fit-content';
+
+            const cells = board.map((_, index) => {
+                const cell = document.createElement('button');
+                cell.style.width = '100px';
+                cell.style.height = '100px';
+                cell.style.fontSize = '30px';
+                cell.style.cursor = 'pointer';
+                cell.style.background = '#667eea';
+                cell.style.color = 'white';
+                cell.style.border = 'none';
+                cell.style.borderRadius = '5px';
+                cell.style.fontWeight = 'bold';
+                cell.onclick = () => {
+                    if (!gameRunning || board[index] !== '') return;
+                    board[index] = human;
+                    cell.textContent = human;
+                    cell.style.background = '#764ba2';
+
+                    if (checkWin(human)) {
+                        setTimeout(() => alert('🎉 Je hebt gewonnen!'), 100);
+                        gameRunning = false;
+                        return;
+                    }
+
+                    if (board.every(c => c !== '')) {
+                        setTimeout(() => alert('🤝 Gelijkspel!'), 100);
+                        gameRunning = false;
+                        return;
+                    }
+
+                    setTimeout(() => {
+                        const aiMove = getBestMove();
+                        if (aiMove !== -1) {
+                            board[aiMove] = ai;
+                            cells[aiMove].textContent = ai;
+                            cells[aiMove].style.background = '#ff6b6b';
+
+                            if (checkWin(ai)) {
+                                setTimeout(() => alert('😢 Computer wint!'), 100);
+                                gameRunning = false;
+                                return;
+                            }
+
+                            if (board.every(c => c !== '')) {
+                                setTimeout(() => alert('🤝 Gelijkspel!'), 100);
+                                gameRunning = false;
+                            }
+                        }
+                    }, 500);
+                };
+                return cell;
+            });
+
+            cells.forEach(cell => gameBoard.appendChild(cell));
+            container.appendChild(gameBoard);
+
+            function checkWin(player) {
+                const lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+                return lines.some(([a, b, c]) => board[a] === player && board[b] === player && board[c] === player);
+            }
+
+            function getBestMove() {
+                for (let i = 0; i < 9; i++) {
+                    if (board[i] === '') {
+                        board[i] = ai;
+                        if (checkWin(ai)) {
+                            board[i] = '';
+                            return i;
+                        }
+                        board[i] = '';
+                    }
+                }
+
+                for (let i = 0; i < 9; i++) {
+                    if (board[i] === '') {
+                        board[i] = human;
+                        if (checkWin(human)) {
+                            board[i] = '';
+                            return i;
+                        }
+                        board[i] = '';
+                    }
+                }
+
+                return [0, 2, 4, 6, 8].find(i => board[i] === '') || board.findIndex(c => c === '');
+            }
+        }
+
+        // ============ PONG GAME ============
+        function loadPongGame(container) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 800;
+            canvas.height = 400;
+            canvas.style.background = '#000';
+            canvas.style.border = '2px solid #fff';
+            canvas.style.display = 'block';
+            canvas.style.margin = '20px auto';
+            container.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            let paddle1 = {x: 10, y: 150, width: 10, height: 100, dy: 0};
+            let paddle2 = {x: 780, y: 150, width: 10, height: 100, dy: 0};
+            let ball = {x: 400, y: 200, radius: 8, dx: 5, dy: 5};
+            let score1 = 0, score2 = 0;
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'w') paddle1.dy = -6;
+                if (e.key === 's') paddle1.dy = 6;
+            });
+
+            document.addEventListener('keyup', (e) => {
+                if (e.key === 'w' || e.key === 's') paddle1.dy = 0;
+            });
+
+            function update() {
+                paddle1.y += paddle1.dy;
+                if (paddle1.y < 0) paddle1.y = 0;
+                if (paddle1.y + paddle1.height > canvas.height) paddle1.y = canvas.height - paddle1.height;
+
+                paddle2.y += (ball.y - (paddle2.y + paddle2.height / 2)) * 0.05;
+                if (paddle2.y < 0) paddle2.y = 0;
+                if (paddle2.y + paddle2.height > canvas.height) paddle2.y = canvas.height - paddle2.height;
+
+                ball.x += ball.dx;
+                ball.y += ball.dy;
+
+                if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
+                    ball.dy = -ball.dy;
+                }
+
+                if (ball.x - ball.radius < paddle1.x + paddle1.width &&
+                    ball.y > paddle1.y && ball.y < paddle1.y + paddle1.height) {
+                    ball.dx = -ball.dx;
+                    ball.x = paddle1.x + paddle1.width + ball.radius;
+                }
+
+                if (ball.x + ball.radius > paddle2.x &&
+                    ball.y > paddle2.y && ball.y < paddle2.y + paddle2.height) {
+                    ball.dx = -ball.dx;
+                    ball.x = paddle2.x - ball.radius;
+                }
+
+                if (ball.x < 0) {
+                    score2++;
+                    ball = {x: 400, y: 200, radius: 8, dx: 5, dy: 5};
+                }
+                if (ball.x > canvas.width) {
+                    score1++;
+                    ball = {x: 400, y: 200, radius: 8, dx: -5, dy: 5};
+                }
+            }
+
+            function draw() {
+                ctx.fillStyle = '#000';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(paddle1.x, paddle1.y, paddle1.width, paddle1.height);
+                ctx.fillRect(paddle2.x, paddle2.y, paddle2.width, paddle2.height);
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.font = 'bold 30px Arial';
+                ctx.fillText(score1, 100, 50);
+                ctx.fillText(score2, 650, 50);
+
+                ctx.font = '12px Arial';
+                ctx.fillText('W/S toetsen om omhoog/omlaag te gaan', 10, 390);
+            }
+
+            function gameLoop() {
+                update();
+                draw();
+                requestAnimationFrame(gameLoop);
+            }
+
+            gameLoop();
+        }
+
+        // ============ HANGMAN GAME ============
+        function loadHangmanGame(container) {
+            const words = ['javascript', 'python', 'gamedesign', 'programmeren', 'internet', 'website', 'computer', 'gaming'];
+            const word = words[Math.floor(Math.random() * words.length)];
+            let guessed = [];
+            let wrong = [];
+            let gameRunning = true;
+
+            const gameDiv = document.createElement('div');
+            gameDiv.style.textAlign = 'center';
+            gameDiv.style.padding = '20px';
+
+            const display = document.createElement('div');
+            display.style.fontSize = '2rem';
+            display.style.margin = '20px 0';
+            display.style.letterSpacing = '10px';
+            display.style.fontFamily = 'monospace';
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.maxLength = '1';
+            input.style.padding = '10px';
+            input.style.fontSize = '20px';
+            input.onkeydown = (e) => {
+                if (e.key === 'Enter') guess();
+            };
+
+            const button = document.createElement('button');
+            button.textContent = 'Gok Letter';
+            button.style.padding = '10px 20px';
+            button.style.fontSize = '16px';
+            button.style.marginLeft = '10px';
+            button.style.background = '#667eea';
+            button.style.color = 'white';
+            button.style.border = 'none';
+            button.style.borderRadius = '5px';
+            button.style.cursor = 'pointer';
+            button.onclick = guess;
+
+            const status = document.createElement('div');
+            status.style.fontSize = '18px';
+            status.style.marginTop = '20px';
+
+            function guess() {
+                const letter = input.value.toLowerCase();
+                input.value = '';
+                if (!letter || guessed.includes(letter) || wrong.includes(letter)) return;
+
+                if (word.includes(letter)) {
+                    guessed.push(letter);
+                } else {
+                    wrong.push(letter);
+                }
+
+                update();
+            }
+
+            function update() {
+                display.textContent = word.split('').map(l => guessed.includes(l) ? l : '_').join(' ');
+                status.innerHTML = `<p>Fout: ${wrong.join(', ') || 'Geen'}</p><p>Gebruikte letters: ${guessed.join(', ') || 'Geen'}</p>`;
+
+                if (wrong.length >= 6) {
+                    status.innerHTML += '<p>😢 Game Over! Woord was: ' + word + '</p>';
+                    input.disabled = true;
+                    button.disabled = true;
+                    gameRunning = false;
+                }
+
+                if (word.split('').every(l => guessed.includes(l))) {
+                    status.innerHTML += '<p>🎉 Gewonnen!</p>';
+                    input.disabled = true;
+                    button.disabled = true;
+                    gameRunning = false;
+                }
+            }
+
+            gameDiv.appendChild(display);
+            gameDiv.appendChild(document.createElement('br'));
+            gameDiv.appendChild(input);
+            gameDiv.appendChild(button);
+            gameDiv.appendChild(status);
+            container.appendChild(gameDiv);
+
+            update();
+        }
+
+        // ============ DICE GAME ============
+        function loadDiceGame(container) {
+            const gameDiv = document.createElement('div');
+            gameDiv.style.textAlign = 'center';
+            gameDiv.style.padding = '30px';
+
+            const dice = document.createElement('div');
+            dice.style.fontSize = '100px';
+            dice.style.margin = '20px 0';
+
+            const button = document.createElement('button');
+            button.textContent = '🎲 Gooi Dobbelsteen!';
+            button.style.padding = '15px 30px';
+            button.style.fontSize = '20px';
+            button.style.background = '#667eea';
+            button.style.color = 'white';
+            button.style.border = 'none';
+            button.style.borderRadius = '5px';
+            button.style.cursor = 'pointer';
+            button.style.marginBottom = '20px';
+
+            const result = document.createElement('div');
+            result.style.fontSize = '24px';
+            result.style.fontWeight = 'bold';
+            result.style.marginTop = '20px';
+
+            const emojis = ['🎲', '1️⃣', '2️��', '3️⃣', '4️⃣', '5️⃣', '6️⃣'];
+
+            button.onclick = () => {
+                const value = Math.floor(Math.random() * 6) + 1;
+                dice.textContent = emojis[value];
+                result.textContent = `Je hebt ${value} gegooid!`;
+            };
+
+            gameDiv.appendChild(button);
+            gameDiv.appendChild(dice);
+            gameDiv.appendChild(result);
+            container.appendChild(gameDiv);
+        }
+
+        // ============ 2048 GAME ============
+        function load2048Game(container) {
+            const gameDiv = document.createElement('div');
+            gameDiv.style.textAlign = 'center';
+            gameDiv.style.padding = '20px';
+
+            const board = Array(16).fill(0);
+            addNewTile();
+            addNewTile();
+
+            const canvas = document.createElement('canvas');
+            canvas.width = 340;
+            canvas.height = 340;
+            canvas.style.margin = '20px auto';
+            canvas.style.display = 'block';
+            canvas.style.border = '2px solid #667eea';
+            canvas.style.borderRadius = '5px';
+            gameDiv.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            const tileSize = 80;
+            const gap = 5;
+            let score = 0;
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowUp') moveUp();
+                if (e.key === 'ArrowDown') moveDown();
+                if (e.key === 'ArrowLeft') moveLeft();
+                if (e.key === 'ArrowRight') moveRight();
+            });
+
+            function addNewTile() {
+                const empty = board.map((v, i) => v === 0 ? i : -1).filter(i => i !== -1);
+                if (empty.length > 0) {
+                    board[empty[Math.floor(Math.random() * empty.length)]] = Math.random() < 0.9 ? 2 : 4;
+                }
+            }
+
+            function move(isVertical) {
+                let moved = false;
+                for (let i = 0; i < 4; i++) {
+                    let line = isVertical ? [board[i], board[i+4], board[i+8], board[i+12]] : [board[i*4], board[i*4+1], board[i*4+2], board[i*4+3]];
+                    let newLine = mergeLine(line.filter(v => v !== 0));
+                    while (newLine.length < 4) newLine.push(0);
+                    if (newLine.join() !== line.join()) moved = true;
+
+                    if (isVertical) {
+                        board[i] = newLine[0];
+                        board[i+4] = newLine[1];
+                        board[i+8] = newLine[2];
+                        board[i+12] = newLine[3];
+                    } else {
+                        board[i*4] = newLine[0];
+                        board[i*4+1] = newLine[1];
+                        board[i*4+2] = newLine[2];
+                        board[i*4+3] = newLine[3];
+                    }
+                }
+                if (moved) addNewTile();
+                draw();
+            }
+
+            function mergeLine(line) {
+                for (let i = 0; i < line.length - 1; i++) {
+                    if (line[i] === line[i+1]) {
+                        line[i] *= 2;
+                        score += line[i];
+                        line.splice(i+1, 1);
+                    }
+                }
+                return line;
+            }
+
+            function moveUp() { move(true); }
+            function moveDown() { board = board.reverse(); move(true); board = board.reverse(); }
+            function moveLeft() { move(false); }
+            function moveRight() { 
+                for (let i = 0; i < 4; i++) {
+                    let row = [board[i*4], board[i*4+1], board[i*4+2], board[i*4+3]].reverse();
+                    row = mergeLine(row.filter(v => v !== 0));
+                    while (row.length < 4) row.unshift(0);
+                    row = row.reverse();
+                    board[i*4] = row[0];
+                    board[i*4+1] = row[1];
+                    board[i*4+2] = row[2];
+                    board[i*4+3] = row[3];
+                }
+                addNewTile();
+                draw();
+            }
+
+            function draw() {
+                ctx.fillStyle = '#bbada0';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                board.forEach((value, index) => {
+                    const x = (index % 4) * (tileSize + gap) + gap;
+                    const y = Math.floor(index / 4) * (tileSize + gap) + gap;
+
+                    const colors = {0: '#cdc1b4', 2: '#eee4da', 4: '#ede0c8', 8: '#f2b179', 16: '#f59563', 32: '#f67c5f', 64: '#f65e3b', 128: '#edcf72', 256: '#edcc61', 512: '#edc850', 1024: '#edc53f', 2048: '#edc22e'};
+                    ctx.fillStyle = colors[value] || '#3c3c2f';
+                    ctx.fillRect(x, y, tileSize, tileSize);
+
+                    if (value > 0) {
+                        ctx.fillStyle = value > 4 ? '#f9f6f2' : '#776e65';
+                        ctx.font = 'bold 35px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(value, x + tileSize/2, y + tileSize/2);
+                    }
+                });
+            }
+
+            draw();
+            container.appendChild(gameDiv);
+        }
+
+        // ============ BREAKOUT GAME ============
+        function loadBreakoutGame(container) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 400;
+            canvas.height = 300;
+            canvas.style.background = '#000';
+            canvas.style.border = '2px solid #fff';
+            canvas.style.display = 'block';
+            canvas.style.margin = '20px auto';
+            container.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            let paddle = {x: 150, y: 280, width: 100, height: 10, dx: 0};
+            let ball = {x: 200, y: 250, radius: 6, dx: 3, dy: -3};
+            let bricks = [];
+            let score = 0;
+
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 5; j++) {
+                    bricks.push({x: j * 80, y: i * 20, width: 75, height: 15, alive: true});
+                }
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') paddle.dx = -5;
+                if (e.key === 'ArrowRight') paddle.dx = 5;
+            });
+
+            document.addEventListener('keyup', () => paddle.dx = 0);
+
+            function update() {
+                paddle.x += paddle.dx;
+                if (paddle.x < 0) paddle.x = 0;
+                if (paddle.x + paddle.width > canvas.width) paddle.x = canvas.width - paddle.width;
+
+                ball.x += ball.dx;
+                ball.y += ball.dy;
+
+                if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) ball.dx = -ball.dx;
+                if (ball.y - ball.radius < 0) ball.dy = -ball.dy;
+
+                if (ball.y - ball.radius < paddle.y && ball.x > paddle.x && ball.x < paddle.x + paddle.width && ball.dy > 0) {
+                    ball.dy = -ball.dy;
+                }
+
+                bricks.forEach(brick => {
+                    if (brick.alive && ball.x > brick.x && ball.x < brick.x + brick.width && ball.y > brick.y && ball.y < brick.y + brick.height) {
+                        brick.alive = false;
+                        ball.dy = -ball.dy;
+                        score += 10;
+                    }
+                });
+
+                if (ball.y > canvas.height) {
+                    alert(`Game Over! Score: ${score}`);
+                    return false;
+                }
+
+                if (bricks.every(b => !b.alive)) {
+                    alert(`🎉 Gewonnen! Score: ${score}`);
+                    return false;
+                }
+
+                return true;
+            }
+
+            function draw() {
+                ctx.fillStyle = '#000';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                bricks.forEach(brick => {
+                    if (brick.alive) {
+                        ctx.fillStyle = '#ff6b6b';
+                        ctx.fillRect(brick.x, brick.y, brick.width, brick.height);
+                    }
+                });
+
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 16px Arial';
+                ctx.fillText(`Score: ${score}`, 10, 20);
+            }
+
+            function gameLoop() {
+                if (update()) {
+                    draw();
+                    requestAnimationFrame(gameLoop);
+                }
+            }
+
+            gameLoop();
+        }
+
+        // Initialize on load
+        window.onload = initGames;
+    </script>
+</body>
+</html>
